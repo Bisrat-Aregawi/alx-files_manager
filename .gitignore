@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # Project Specific ignores
-main.js
+*main.js
