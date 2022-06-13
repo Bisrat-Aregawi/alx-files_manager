@@ -11,6 +11,9 @@ const host = process.env.HOST || 'localhost';
 // Create an express app
 const app = express();
 
+// Register a json reader middleware
+app.use(express.json());
+
 // Use routes defined in index
 app.use(router);
 
