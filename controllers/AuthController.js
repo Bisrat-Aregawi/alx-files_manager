@@ -18,11 +18,15 @@ export default class AuthController {
    */
   static async getConnect(request, response) {
     // Get user's email:password combo from `Authorization` field
-    const emailPwdB64Combo = request.get('Authorization')
-      .split(' ')[1];
+    const authHeaderVal = request.get('Authorization');
+    if (authHeaderVal === undefined) {
+      response.status(401).json({ error: 'Unauthorized' });
+      return;
+    }
+    const emailPwdB64 = authHeaderVal.split(' ')[1];
 
     // Decode to utf-8
-    const emailPwdCombo = Buffer.from(emailPwdB64Combo, 'base64')
+    const emailPwdCombo = Buffer.from(emailPwdB64, 'base64')
       .toString('utf-8');
 
     // Separate credentials accounting for ':' happening in the password
