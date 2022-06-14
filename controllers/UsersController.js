@@ -2,7 +2,9 @@
  * @module UsersController
  */
 import sha1 from 'sha1';
+import mongo from 'mongodb';
 import dbClient from '../utils/db';
+import redisClient from '../utils/redis';
 
 export default class UsersController {
   /**
@@ -48,5 +50,28 @@ export default class UsersController {
         { error: 'Already exist' },
       );
     }
+  }
+
+  /**
+   * @function getMe
+   * @summary Retrieve the user based on the token provided
+   *
+   * @param {object} request request object of express app
+   * @param {object} response response object of express app
+   * @returns {object} undefined
+   */
+  static async getMe(request, response) {
+    // Check if the token is provided
+    const token = request.get('X-Token');
+    if (token !== undefined) {
+      const usrId = await redisClient.get(`auth_${token}`);
+      if (usrId !== null) {
+        const usr = await dbClient.database.collection('users')
+          .findOne({ _id: mongo.ObjectID(usrId) });
+        response.status(200).json(
+          { id: usrId, email: usr.email },
+        );
+      } else response.status(401).json({ error: 'Unauthorized' });
+    } else response.status(401).json({ error: 'Unauthorized' });
   }
 }

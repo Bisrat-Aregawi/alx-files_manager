@@ -37,7 +37,7 @@ class RedisClient {
    * @function get
    * @summary Async function returns value stored in key
    * @param {string} key - Redis string key
-   * @returns {string} Value stored in `key`
+   * @returns {PromiseLike} A resolved or rejected promise
    */
   async get(key) {
     const getAsync = promisify(this.client.GET).bind(this.client);
@@ -50,6 +50,7 @@ class RedisClient {
    * @param {string} key - Redis string key to set value on
    * @param {string} value - Redis string value set on `key`
    * @param {number} duration - Duration in seconds that `value` is set on `key`
+   * @returns {PromiseLike} A resolved or rejected promise
    */
   async set(key, value, duration) {
     const setAsync = promisify(this.client.SET).bind(this.client);
