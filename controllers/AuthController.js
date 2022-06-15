@@ -12,8 +12,8 @@ export default class AuthController {
    * @summary Sign in user and generate a 24 hr token after verifying
    * the user exists in the database
    *
-   * @param {object} request request object of express app
-   * @param {object} response response object ofalse express app
+   * @param {object} request - request object of an express app
+   * @param {object} response - response object of an express app
    * @returns {object} undefined
    */
   static async getConnect(request, response) {
@@ -63,8 +63,8 @@ export default class AuthController {
    * @function getDisconnect
    * @summary Sign out user and remove associated token from redis database
    *
-   * @param {object} request request object of express app
-   * @param {object} response response object ofalse express app
+   * @param {object} request - equest object of an express app
+   * @param {object} response - esponse object of an express app
    * @returns {object} undefined
    */
   static async getDisconnect(request, response) {

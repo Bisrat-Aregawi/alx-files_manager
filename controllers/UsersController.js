@@ -11,8 +11,8 @@ export default class UsersController {
    * @function postNew
    * @summary Save new user to mongo database
    *
-   * @param {object} request request object of express app
-   * @param {object} response response object of express app
+   * @param {object} request - request object of express app
+   * @param {object} response - response object of express app
    * @returns {object} undefined
    */
   static async postNew(request, response) {
@@ -56,8 +56,8 @@ export default class UsersController {
    * @function getMe
    * @summary Retrieve the user based on the token provided
    *
-   * @param {object} request request object of express app
-   * @param {object} response response object of express app
+   * @param {object} request - request object of express app
+   * @param {object} response - response object of express app
    * @returns {object} undefined
    */
   static async getMe(request, response) {

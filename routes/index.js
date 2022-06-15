@@ -5,6 +5,7 @@ import express from 'express';
 import AppController from '../controllers/AppController';
 import UsersController from '../controllers/UsersController';
 import AuthController from '../controllers/AuthController';
+import FilesController from '../controllers/FilesController';
 
 // Setup a router instance
 const router = express.Router();
@@ -26,5 +27,8 @@ router.get('/disconnect', AuthController.getDisconnect);
 
 // User home route
 router.get('/users/me', UsersController.getMe);
+
+// File upload route
+router.post('/files', FilesController.postUpload);
 
 export default router;
